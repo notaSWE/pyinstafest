@@ -3,24 +3,31 @@ from datetime import timedelta
 from PIL import Image, ImageDraw, ImageFont
 import json, random, sys, time
 
+# Add the --caps flag after your json file to output image in all uppercase
+allCaps = False
+
 try:
-    username = sys.argv[1].split("takeout/")[1].split(".")[0]
-    filePath = sys.argv[1]
+    if len(sys.argv) == 3:
+        if sys.argv[2] == "--caps":
+            allCaps = True
+        else:
+            quit()
+    if len(sys.argv) > 1 and len(sys.argv) <= 3:
+        username = sys.argv[1].split("takeout/")[1].split(".")[0]
+        filePath = sys.argv[1]
+    else:
+        quit()    
 except:
     print("Usage: python3 pyinstafest.py takeout/yourname.json")
     quit()
 
 # Initial config
 banner = "PRESENTED BY NOTASWE"
-try:
-    bannerFont = ImageFont.truetype('font/med.ttf', 60)
-    headlinerFont = ImageFont.truetype('font/med.ttf', 160)
-    userFont = ImageFont.truetype('font/cursive.ttf', 140)
-    supportFontLg = ImageFont.truetype('font/med.ttf', 80)
-    supportFontSm = ImageFont.truetype('font/med.ttf', 50)
-except:
-    print("Remember to download/add fonts to font/ directory!")
-    quit()
+bannerFont = ImageFont.truetype('font/med.ttf', 60)
+headlinerFont = ImageFont.truetype('font/med.ttf', 140)
+userFont = ImageFont.truetype('font/cursive.ttf', 140)
+supportFontLg = ImageFont.truetype('font/med.ttf', 80)
+supportFontSm = ImageFont.truetype('font/med.ttf', 50)
 
 bg = Image.open("img/youtube.png")
 imWidth = list(bg.size)[0]
@@ -63,6 +70,9 @@ try:
     support = []
     for k, _v in sorted(mostListenedTo.items(), key=lambda x: x[1], reverse=True)[3:]:
         support.append(k.split(' - Topic')[0])
+    # Capitalize if --caps flag was used
+    if allCaps:
+        headliners, support = [item.upper() for item in headliners], [item.upper() for item in support]
     # Randomly shuffle support list; off by default
     # random.shuffle(support)
 except:
@@ -178,6 +188,6 @@ for i in range(len(headliners)):
     bottomOfHeadliner = artistCoords[1] + currHeight
     draw_support(bottomOfHeadliner, support)
     supportCounter += 1
-    yOffset += 310
+    yOffset += 320
 
 bg.save(f"img/output_{int(time.time())}.png")

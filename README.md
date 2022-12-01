@@ -13,6 +13,8 @@ I'm stubborn and like writing Python
 
 1. Export the json from [Google Takeout](https://takeout.google.com) - you ONLY need YouTube/YouTube music!
     1. Save the file as __yourname__.json
+    ![Google Takeout 01](/img/takeout01.JPG "This is a sample output file")
+    ![Google Takeout 02](/img/takeout02.JPG "This is a sample output file")
 2. Git clone this repo
 3. Copy the export from step 1 into __takeout/__
     1. Relative path should be __takeout/yourname.json__ 
@@ -22,10 +24,15 @@ I'm stubborn and like writing Python
     2. Update the font config in __pyinstafest.py__ (lines 15-19) if your font filenames are different!
 5. __python3 pyinstafest.py takeout/yourname.json__
     1. Images will output to **img/output_unixtimestamp.png**
+    2. Add "--caps" to capitalize artists
 
-## Images
+## Standard output
 
 ![Demo output](/img/sample.png "This is a sample output file")
+
+## Output using the "--caps" flag
+
+![Demo output capitalized](/img/sample_caps.png "This is a sample output file")
 
 ## Fonts links (external)
 
