@@ -12,11 +12,15 @@ except:
 
 # Initial config
 banner = "PRESENTED BY NOTASWE"
-bannerFont = ImageFont.truetype('font/med.ttf', 60)
-headlinerFont = ImageFont.truetype('font/med.ttf', 160)
-userFont = ImageFont.truetype('font/cursive.ttf', 140)
-supportFontLg = ImageFont.truetype('font/med.ttf', 80)
-supportFontSm = ImageFont.truetype('font/med.ttf', 50)
+try:
+    bannerFont = ImageFont.truetype('font/med.ttf', 60)
+    headlinerFont = ImageFont.truetype('font/med.ttf', 160)
+    userFont = ImageFont.truetype('font/cursive.ttf', 140)
+    supportFontLg = ImageFont.truetype('font/med.ttf', 80)
+    supportFontSm = ImageFont.truetype('font/med.ttf', 50)
+except:
+    print("Remember to download/add fonts to font/ directory!")
+    quit()
 
 bg = Image.open("img/youtube.png")
 imWidth = list(bg.size)[0]
